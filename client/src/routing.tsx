@@ -4,7 +4,7 @@ import { Router, Route } from 'react-router-dom'
 import Callback from './components/Callback'
 import createHistory from 'history/createBrowserHistory'
 import App from './App';
-const history = createHistory()
+const history = require("history").createBrowserHistory()
 
 const auth = new Auth(history)
 

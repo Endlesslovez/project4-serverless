@@ -72,19 +72,21 @@ export async function updateTodo(todoId: string, userId: string, model: TodoUpda
   console.log('Update todo');
 
   const params = {
-    TableName: this.todosTable,
-    Key: {
-      todoId: todoId,
-      userId: userId
+    TableName: todosTable,
+    Key: { todoId: todoId, userId: userId },
+    UpdateExpression:
+      "set #name = :name, #dueDate = :dueDate, #done = :done",
+    ExpressionAttributeNames: {
+      "#name": "name",
+      "#dueDate": "dueDate",
+      "#done": "done",
     },
-    UpdateExpression: "set #todoName = :todoName, dueDate = :dueDate, done = :done",
-    ExpressionAttributeNames: { '#todoName': "name" },
     ExpressionAttributeValues: {
-      ":todoName": model.name,
+      ":name": model.name,
       ":dueDate": model.dueDate,
-      ":done": model.done
+      ":done": model.done,
     },
-    ReturnValues: "ALL_NEW"
+    ReturnValues: "ALL_NEW",
   };
 
   const result = await docClient.update(params).promise();

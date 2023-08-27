@@ -11,9 +11,6 @@ export async function getTodos(idToken: string): Promise<Todo[]> {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${idToken}`,
-      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-      "Access-Control-Allow-Headers" : "Content-Type, Authorization, X-Requested-With,Content-Type, Authorization, X-Requested-With",
-      "Access-Control-Allow-Origin": "*"
     },
   })
   console.log('Todos:', response.data)
